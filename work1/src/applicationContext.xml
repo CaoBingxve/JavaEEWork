@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+      ">
+		
+	<!-- bean configuration here -->
+	<bean id="helloSpring" class="com.itheima.HelloSpring">
+	<!-- 为userName属性赋值 -->
+	<property name="userName" value="曹冰雪">
+	</property>
+	</bean>
+	
+	<bean id="student1" class="test.Student1">
+	<!-- 
+		确定参数
+		name属性：通过参数的名字确定
+		type属性：通过参数的类型确定
+		index属性：通过参数的索引来确定
+		给属性赋值
+		value属性：用来给基本类型赋值
+		ref属性：用来给引用类型进行赋值
+	 -->
+		<!-- <constructor-arg name="Class" value="软工212"></constructor-arg>
+		<constructor-arg name="Sname" value="曹"></constructor-arg>
+		<constructor-arg name="id" value="123"></constructor-arg> -->
+		
+		<!-- <constructor-arg type="String" value="软工212"></constructor-arg>
+		<constructor-arg type="String" value="曹"></constructor-arg>
+		<constructor-arg type="Integer" value="123"></constructor-arg> -->
+		
+		<constructor-arg index="0" value="软工212"></constructor-arg>
+		<constructor-arg index="1" value="曹"></constructor-arg>
+		<constructor-arg index="2" value="123"></constructor-arg>
+	</bean>
+	
+	<bean name="student2" class="test.Student2">
+	<!-- 
+		name的值准确来讲并不是属性名，而是set方法去掉set关键字后面的文字
+		
+		属性名 id->set方法是setIdd();
+		此时setIdd去掉关键字set -> idd（驼峰命名）
+	 -->
+		<property name="Class" value="软工212"></property>
+		<property name="Sname" value="曹"></property>
+		<property name="id" value="123"></property>
+		<property name="student1" ref="student1"></property>
+	</bean>
+	
+	<bean id="userDao" class="dao.UserDaoImpl"></bean>
+	<bean id="userService" class="service.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	
+	<bean id="reflection" class="test.Reflection">
+		<property name="name" value="Reflection"></property>
+		<property name="age" value="24"></property>
+	</bean>
+	
+	<bean id="orderService" class="com.itheima.OrderServiceImpl"></bean>
+</beans>
